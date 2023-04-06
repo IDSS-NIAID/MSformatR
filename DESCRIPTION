@@ -1,0 +1,22 @@
+Package: MSformatR
+Title: Basic processing and summarization of raw MS output
+Version: 0.1
+Authors@R: c(person('Randy', 'Johnson', email = 'johnsonra@mail.ih.gov', role = c('cre', 'aut')))
+Description: MSformatR contains tools for basic processing and summarizing of raw MS output.
+License: MIT + file LICENSE
+Depends: R (>= 4.2)
+Imports:
+  dplyr,
+  htmltools,
+  magrittr,
+  quarto,
+  readr,
+  reactable,
+  rlang,
+  stringr,
+  yaml
+URL: https://github.com/IDSS-NIAID/MSformatR
+BugReports: https://github.com/IDSS-NIAID/MSformatR/issues
+Language: en-US
+Encoding: UTF-8
+RoxygenNote: 7.2.3
