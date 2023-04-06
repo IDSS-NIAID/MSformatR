@@ -1,0 +1,10 @@
+.DS_Store
+*.Rhistory
+.Rproj.user/
+*.Rproj
+
+data/
+
+config.yml
+*.html
+summary_files/
