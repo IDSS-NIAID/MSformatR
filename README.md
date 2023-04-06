@@ -2,6 +2,28 @@
 
 MSformatR contains tools for basic processing and summarizing of raw MS output.
 
+### Installation
+
+To install, open an R session, and execute the following command:
+
+```
+remotes::install_github('IDSS-NIAID/MSformatR', ref = 'dev')
+```
+
+### Simple run
+
+For the most basic usage, start up an R session and set the working directory to the location containing Peaks 11 html output directories and execute the following command:
+
+```
+MSformatR::summarizeMS()
+```
+
+Alternately, you could open a terminal window and navigate to the directory containing one or more Peaks 11 html output directories. From the terminal window, execute the following command:
+
+```
+R -e 'MSformatR::summarizeMS()'
+```
+
 ### Config file details
 
 The config file, `config.yml`, will control the general behavior of MSformatR when generating the summary files and should be located in the current working directory when MSformatR is run.
