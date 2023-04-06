@@ -5,75 +5,9 @@ format: html
 
 ```{r setup}
 #| include: false
-library(yaml)
-
-library(dplyr)
-library(readr)
-library(stringr)
-
 library(reactable)
 
-##########
-# config #
-##########
-
-if(file.exists('config.yml'))
-{
-  config <- read_yaml('config.yml')
-}else{
-  config <- list()
-}
-
-
-##### Default configurations #####
-
-if(is.null(config$input))
-  config$input <- '*'
-
-if(is.null(config$format))
-  config$format <- 'peaks11'
-
-
-##### Determine input files #####
-
-if(str_sub(config$input[1], start = -1) == "*")
-{
-  if(length(config$input) > 1)
-    stop("Expected values for input are a vector of paths, a single path, or a single path with a wild card at the end of the path, '*'.")
-  
-  config$input <- gsub('*', '', config$input, fixed = TRUE) %>%
-    strsplit('/') %>%
-    unlist() %>%
-    list.dirs(recursive = FALSE)
-}
-
-
-#################
-# Process input #
-#################
-i <- config$input[1]
-
-proteins <- file.path(i, 'db.proteins.csv') %>%
-  read_csv() %>%
-  filter(!grepl('#CONTAM', Accession, fixed = TRUE))
-  
-peptides <- file.path(i, 'db.protein-peptides.csv') %>%
-  read_csv() %>%
-  filter(!grepl('#CONTAM', Accession, fixed = TRUE))
-
-summary_table <- reactable(proteins, details = function(i) {
-    retval <- filter(peptides, Accession == proteins$Accession[i])
-    
-    htmltools::div(style = "padding: 1rem",
-                   reactable(retval,
-                             columns = list(Accession = colDef(width = 250),
-                                            Peptide = colDef(width = 250),
-                                            `Source File` = colDef(width = 200),
-                                            PTM = colDef(width = 300),
-                                            AScore = colDef(width = 250))))
-    }, columns = list(Accession = colDef(width = 250),
-                      PTM = colDef(width = 300), 
-                      Description = colDef(width = 500)))
+load('summary.RData')
 ```
 
 ```{r}

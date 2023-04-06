@@ -8,9 +8,10 @@ The config file, `config.yml`, will control the general behavior of MSformatR wh
 
 Settable parameters:
 
-* `input`: This specifies the location of the data to be summarized. See the `format` section below for format-specific details. By default, MSformatR will look for all relevant files in the current working directory (i.e. `input: *`). Use of unix-style path seperators, `/`, is required. R will check the system and replace them with the correct path seperator if running on Windows. One of three values is expected:
+* `input`: This specifies the location of the data to be summarized. See the `format` section below for format-specific details. By default, MSformatR will look for all relevant files in the current working directory (i.e. `input: *`). Use of unix-style path seperators, `/`, is required. R will check the system and replace them with the correct path seperator if running on Windows. `input` is assumed to be either the same as or a subdirectory of `root`. One of three values is expected:
     * An array of input directories (e.g. `input: ["data/A", "data/B", "data/C"]`)
     * A single path (e.g. `input: "data/raw_results"`)
     * A path to a directory containing multiple files to be summarized together. This should end in an `*`. (e.g. `input: "data/*"`)
 * `format`: This specifies the source of the raw data. Default is `peaks11`. Supported formats:
     * `peaks11` - html output from Peaks 11. Expected values for `input` are directory paths, each of which should contain multiple html files, csv files, and a directory of images.
+* `root`: This specifies the directory in which to look for supporting files. If no directory is provided, MSformatR will check if the current working directory is inside of this git repository and use the root directory of the git repo. Otherwise, it will use the current working directory. If the required supporting files are not found in `root`, it will attempt to download them from the internet.
