@@ -61,7 +61,7 @@ summarizeMS <- function(input = NULL, format = NULL, qmd = NULL)
 
   ##### Default configurations #####
   if(is.null(config$input))
-    config$input <- '*'
+    config$input <- file.path(getwd(), '*')
 
   if(is.null(config$format))
     config$format <- 'peaks11'
@@ -71,8 +71,8 @@ summarizeMS <- function(input = NULL, format = NULL, qmd = NULL)
 
   # look for required supporting files - if not found, use installed version
   if(!file.exists(file.path(config$qmd, 'summary.qmd')))
-    download.file('https://raw.githubusercontent.com/IDSS-NIAID/MSformatR/main/summary.qmd',
-                  'summary.qmd')
+    file.copy(system.file('quarto/summary.qmd', package = 'MSformatR'),
+              file.path(config$qmd, 'summary.qmd'))
 
 
   ##### Determine input files #####
@@ -85,7 +85,7 @@ summarizeMS <- function(input = NULL, format = NULL, qmd = NULL)
     config$input <- gsub('*', '', config$input, fixed = TRUE) %>%
       strsplit('/') %>%
       unlist() %>%
-      file.path() %>%
+      paste(collapse = .Platform$file.sep) %>%
       list.dirs(recursive = FALSE)
   }
 
