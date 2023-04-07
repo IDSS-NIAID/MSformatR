@@ -9,6 +9,7 @@ Imports:
   dplyr,
   htmltools,
   magrittr,
+  purrr,
   quarto,
   readr,
   reactable,
